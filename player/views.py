@@ -10,8 +10,9 @@ def index(request: HttpRequest):
 
 
 def artist(request: HttpRequest, artist_slug):
-
+    a = get_object_or_404(Artist, slug=artist_slug)
     context = {
-        'artist': get_object_or_404(Artist, slug=artist_slug)
+        'status': Artist.Status(a.verified).label,
+        'artist': a
     }
     return render(request, 'artist.html', context)

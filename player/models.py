@@ -13,15 +13,22 @@ def audio_path():
 
 
 class Artist(models.Model):
+    class Status(models.IntegerChoices):
+        unverified = 0, 'unverified'
+        verified = 1, 'verified'
+
     name = models.CharField(max_length=255)
-    listeners = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    monthly_listeners = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     slug = models.SlugField(unique=True)
+    subscribers = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    bio = models.TextField()
+    verified = models.IntegerField(default=Status.unverified, choices=Status)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ['-listeners', 'name']
+        ordering = ['-monthly_listeners', 'name']
 
     def get_absolute_url(self):
         return '/artist/artist_' + str(self.pk)
