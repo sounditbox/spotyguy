@@ -14,8 +14,4 @@ class Migration(migrations.Migration):
             name="artist",
             options={"ordering": ["-listeners", "name"]},
         ),
-        migrations.AddIndex(
-            model_name="artist",
-            index=models.Index(fields=["name"], name="player_arti_name_d1419d_idx"),
-        ),
     ]

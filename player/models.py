@@ -15,15 +15,13 @@ def audio_path():
 class Artist(models.Model):
     name = models.CharField(max_length=255)
     listeners = models.IntegerField(validators=[MinValueValidator(0)], default=0)
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
         ordering = ['-listeners', 'name']
-        indexes = [
-            models.Index(fields=['name'])
-        ]
 
 
 class Song(models.Model):
