@@ -23,6 +23,9 @@ class Artist(models.Model):
     class Meta:
         ordering = ['-listeners', 'name']
 
+    def get_absolute_url(self):
+        return '/artist/artist_' + str(self.pk)
+
 
 class Song(models.Model):
     # id - автоматически определяется
