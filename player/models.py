@@ -23,7 +23,7 @@ class Artist(models.Model):
     subscribers = models.IntegerField(validators=[MinValueValidator(0)], default=0)
     bio = models.TextField()
     verified = models.IntegerField(default=Status.unverified, choices=Status)
-    pfp = models.ImageField(null=True)
+    pfp = models.ImageField(default='default_image.jpg')
 
     def __str__(self):
         return self.name
