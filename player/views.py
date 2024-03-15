@@ -5,7 +5,7 @@ from .models import Artist
 
 
 def index(request: HttpRequest):
-    context = {'title': 'Главная страница'}
+    context = {'artists': Artist.objects.all()}
     return render(request, 'index.html', context)
 
 
@@ -16,3 +16,7 @@ def artist(request: HttpRequest, artist_slug):
         'artist': a
     }
     return render(request, 'artist.html', context)
+
+
+def template_tags_and_filters_example(request: HttpRequest):
+    return render(request, 'template_example.html')

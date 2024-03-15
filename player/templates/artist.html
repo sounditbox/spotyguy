@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Spotiguy Artist page</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <h1>Artist page: {{ artist.name }}</h1>
 <h2>Status: {{ status }}</h2>
 <h3>Monthly listeners: {{ artist.monthly_listeners }}</h3>
@@ -12,7 +9,6 @@
 <h3>bio: </h3>
 <p>{{ artist.bio }}</p>
 <h3>Profile picture:</h3>
-{% load static %}
+
 <img src="{% static artist.pfp %}" width="720" height="480"  alt="artist image">
-</body>
-</html>
+{% endblock %}
