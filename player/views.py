@@ -5,7 +5,7 @@ from .models import Artist
 
 
 def index(request: HttpRequest):
-    context = {'artists': Artist.objects.all()}
+    context = {'artists': Artist.objects.all(), 'some_list': [1, 2, 3, 4, 5, 6, 7], 'some_value': 4}
     return render(request, 'index.html', context)
 
 
