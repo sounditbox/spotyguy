@@ -2,13 +2,16 @@
 {% load static %}
 
 {% block content %}
-<h1>Artist page: {{ artist.name }}</h1>
-<h2>Status: {{ status }}</h2>
+<h1>{{artist.name}} {% if artist.verified %}
+    <img alt="Картинка не найдена" width="30"
+         height="30"
+         src="{% static 'img/verified.png' %}">
+{% endif %}</h1>
+<img class="text-center" src="{% static artist.pfp %}" width="720" height="480"  alt="artist image">
+
 <h3>Monthly listeners: {{ artist.monthly_listeners }}</h3>
 <h3>Subscribers: {{ artist.subscribers }}</h3>
 <h3>bio: </h3>
 <p>{{ artist.bio }}</p>
-<h3>Profile picture:</h3>
 
-<img src="{% static artist.pfp %}" width="720" height="480"  alt="artist image">
 {% endblock %}
