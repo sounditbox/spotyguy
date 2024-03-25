@@ -14,8 +14,8 @@ def audio_path():
 
 class Artist(models.Model):
     class Status(models.IntegerChoices):
-        unverified = 0, 'unverified'
-        verified = 1, 'verified'
+        UNVERIFIED = 0, 'unverified'
+        VERIFIED = 1, 'verified'
 
     name = models.CharField(max_length=255)
     monthly_listeners = models.IntegerField(validators=[MinValueValidator(0)],
@@ -24,7 +24,7 @@ class Artist(models.Model):
     subscribers = models.IntegerField(validators=[MinValueValidator(0)],
                                       default=0)
     bio = models.TextField()
-    verified = models.IntegerField(default=Status.unverified, choices=Status)
+    verified = models.IntegerField(default=Status.UNVERIFIED, choices=Status)
     pfp = models.ImageField(default='default_image.jpg')
 
     def __str__(self):
@@ -37,15 +37,34 @@ class Artist(models.Model):
         return '/artist/artist_' + str(self.pk)
 
 
+class Release(models.Model):
+    class Type(models.TextChoices):
+        SINGLE = 'Single'
+        EP = 'EP'
+        ALBUM = 'Album'
+
+    date = models.DateField(auto_now_add=True)
+    name = models.CharField(max_length=255)
+    artist = models.ForeignKey(to=Artist, on_delete=models.CASCADE,
+                               related_name='releases')
+
+    def __str__(self):
+        return f'{self.name} of {self.artist}'
+
+    def get_absolute_url(self):
+        return '/releases/release_' + str(self.pk)
+
+
 class Song(models.Model):
     # id - автоматически определяется
     title = models.CharField(max_length=255)
     duration = models.IntegerField(validators=[MinValueValidator(1)])
     source = models.FilePathField(path=audio_path)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    release = models.ForeignKey(Release, on_delete=models.CASCADE,
+                                related_name='songs')
 
     def __str__(self):
-        return f'{self.title} of {self.artist}'
+        return f'{self.title} from {self.release}'
 
     def get_absolute_url(self):
         return '/artist/artist_' + str(self.pk)
