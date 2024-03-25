@@ -45,8 +45,10 @@ class Release(models.Model):
 
     date = models.DateField(auto_now_add=True)
     name = models.CharField(max_length=255)
+    type = models.CharField(default=Type.SINGLE, choices=Type, max_length=50)
     artist = models.ForeignKey(to=Artist, on_delete=models.CASCADE,
                                related_name='releases')
+    cover = models.ImageField(default='default__cover_image.jpg')
 
     def __str__(self):
         return f'{self.name} of {self.artist}'

@@ -1,32 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-<h1>{{artist.name}} {% if artist.verified %}
-    <img alt="Картинка не найдена" width="30"
-         height="30"
-         src="{% static 'img/verified.png' %}">
-{% endif %}</h1>
-<img class="text-center" src="{% static artist.pfp %}" width="720" height="480"  alt="artist image">
 
-<h3>Monthly listeners: {{ artist.monthly_listeners }}</h3>
-<h3>Subscribers: {{ artist.subscribers }}</h3>
-<h3>bio: </h3>
-<p>{{ artist.bio }}</p>
-      <div class="row">
-                {% for rel in artist.releases %}
+
+    <!--    <section class="jumbotron text-center">-->
+    <!--        <div class="container">-->
+    <!--            <h1 class="jumbotron-heading">Album example</h1>-->
+    <!--            <p class="lead text-muted">Something short and leading about the-->
+    <!--                collection below—its contents, the creator, etc. Make it short-->
+    <!--                and sweet, but not too short so folks don't simply skip over it-->
+    <!--                entirely.</p>-->
+    <!--            <p>-->
+    <!--                <a href="https://getbootstrap.com/docs/4.0/examples/album/#"-->
+    <!--                   class="btn btn-primary my-2">Main call to action</a>-->
+    <!--                <a href="https://getbootstrap.com/docs/4.0/examples/album/#"-->
+    <!--                   class="btn btn-secondary my-2">Secondary action</a>-->
+    <!--            </p>-->
+    <!--        </div>-->
+    <!--    </section>-->
+
+            <div class="row">
+                {% for rel in releases %}
                 <div class="col-md-4">
-                    <a style="text-decoration: none;" href="{{ rel.get_absolute_url }}">
+                    <a style="text-decoration: none;" href="{{ artist.get_absolute_url }}">
                         <div class="card mb-4 box-shadow">
                             <img class="card-img-top"
                                  alt="Thumbnail [100%x225]"
                                  style="height: 225px; width: 100%; display: block;"
-                                 src="{% static rel.cover %}"
+                                 src="{% static artist.pfp %}"
                                  data-holder-rendered="true">
                             <div class="card-body">
-                                <h3>{{rel.name}}</h3>
-                                <h4>rel.type.value</h4>
-                                <h5>{{ rel.date }}</h5>
+                                <h3>{{artist.name}} {% if artist.VERIFIED %}
+                                    <img alt="Картинка не найдена" width="30"
+                                         height="30"
+                                         src="{% static 'img/verified.png' %}">
+                                    {% endif %}</h3>
+
+                                <p class="card-text">{{artist.bio}}</p>
+                                <p>Monthly listeners: {{ artist.monthly_listeners }}</p>
+                                <p>Subscribers: {{ artist.subscribers }}</p>
                                 <!--                            <div class="d-flex justify-content-between align-items-center">-->
                                 <!--                                <div class="btn-group">-->
                                 <!--                                    <button type="button"-->
@@ -46,6 +58,8 @@
                 </div>
                 {% endfor%}
             </div>
+
+
 
 
 {% endblock %}
