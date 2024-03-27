@@ -27,7 +27,7 @@
                             <img class="card-img-top"
                                  alt="Thumbnail [100%x225]"
                                  style="height: 225px; width: 100%; display: block;"
-                                 src="{% static artist.pfp %}"
+                                 src="{{ artist.pfp.url }}"
                                  data-holder-rendered="true">
                             <div class="card-body">
                                 <h3>{{artist.name}} {% if artist.verified %}
