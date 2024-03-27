@@ -7,7 +7,7 @@
          height="30"
          src="{% static 'img/verified.png' %}">
 {% endif %}</h1>
-<img class="text-center" src="{% static artist.pfp %}" width="720" height="480"  alt="artist image">
+<img class="text-center" src="{{ artist.pfp.url }}" width="720" height="480"  alt="artist">
 
 <h3>Monthly listeners: {{ artist.monthly_listeners }}</h3>
 <h3>Subscribers: {{ artist.subscribers }}</h3>
@@ -21,11 +21,11 @@
                             <img class="card-img-top"
                                  alt="Thumbnail [100%x225]"
                                  style="height: 225px; width: 100%; display: block;"
-                                 src="{% static rel.cover %}"
+                                 src="{{ rel.cover.url }}"
                                  data-holder-rendered="true">
                             <div class="card-body">
                                 <h3>{{rel.name}}</h3>
-                                <h4>rel.type.value</h4>
+                                <h4>{{rel.type.value}}</h4>
                                 <h5>{{ rel.date }}</h5>
                                 <!--                            <div class="d-flex justify-content-between align-items-center">-->
                                 <!--                                <div class="btn-group">-->

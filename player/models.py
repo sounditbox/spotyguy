@@ -9,8 +9,7 @@ from django.db import models
 
 
 def audio_path():
-    return os.path.join(settings.LOCAL_FILE_DIR, "audio")
-
+    return settings.AUDIO_PATH
 
 class Artist(models.Model):
     class Status(models.IntegerChoices):
@@ -47,6 +46,8 @@ class Release(models.Model):
     name = models.CharField(max_length=255)
     artist = models.ForeignKey(to=Artist, on_delete=models.CASCADE,
                                related_name='releases')
+    type = models.CharField(default=Type.SINGLE, choices=Type, max_length=50)
+    cover = models.ImageField(default='default__cover_image.jpg', null=True)
 
     def __str__(self):
         return f'{self.name} of {self.artist}'
@@ -59,7 +60,7 @@ class Song(models.Model):
     # id - автоматически определяется
     title = models.CharField(max_length=255)
     duration = models.IntegerField(validators=[MinValueValidator(1)])
-    source = models.FilePathField(path=audio_path)
+    source = models.FilePathField(path=settings.AUDIO_PATH)
     release = models.ForeignKey(Release, on_delete=models.CASCADE,
                                 related_name='songs')
 
