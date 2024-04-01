@@ -10,7 +10,9 @@ class ArtistAdmin(admin.ModelAdmin):
     list_display = ('name', 'monthly_listeners', 'verified', 'earnings', 'slug')
     list_editable = ('monthly_listeners', 'verified')
     list_display_links = ('name', 'slug')
+    list_filter = ('verified',)
 
+    @admin.decorators.display(description='Заработок', ordering='monthly_listeners')
     def earnings(self, artist: Artist):
         return f'{artist.monthly_listeners * 0.00001:.2f}$ last month'
 

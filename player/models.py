@@ -16,7 +16,7 @@ class Artist(models.Model):
         UNVERIFIED = 0, 'unverified'
         VERIFIED = 1, 'verified'
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, verbose_name='Имя')
     monthly_listeners = models.IntegerField(validators=[MinValueValidator(0)],
                                             default=0)
     slug = models.SlugField(unique=True)
@@ -31,6 +31,9 @@ class Artist(models.Model):
 
     class Meta:
         ordering = ['-monthly_listeners', 'name']
+        verbose_name = "Артист"
+        verbose_name_plural = "Артисты"
+
 
     def get_absolute_url(self):
         return '/artist/artist_' + str(self.pk)
