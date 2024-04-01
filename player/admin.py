@@ -31,7 +31,9 @@ class ArtistAdmin(admin.ModelAdmin):
 
 @admin.register(Release)
 class ReleaseAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'date', 'type', 'cover', 'artist')
+    list_editable = ('type', 'artist')
+    list_display_links = ('name',)
 
 
 @admin.register(Song)
