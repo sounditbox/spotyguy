@@ -18,13 +18,13 @@ class Artist(models.Model):
 
     name = models.CharField(max_length=255, verbose_name='Имя')
     monthly_listeners = models.IntegerField(validators=[MinValueValidator(0)],
-                                            default=0)
-    slug = models.SlugField(unique=True)
+                                            default=0, verbose_name='Слушатели')
+    slug = models.SlugField(unique=True, verbose_name='Слаг')
     subscribers = models.IntegerField(validators=[MinValueValidator(0)],
                                       default=0)
-    bio = models.TextField()
-    verified = models.IntegerField(default=Status.UNVERIFIED, choices=Status)
-    pfp = models.ImageField(default='default_image.jpg')
+    bio = models.TextField(verbose_name='Био')
+    verified = models.IntegerField(default=Status.UNVERIFIED, choices=Status, verbose_name='Верификация')
+    pfp = models.ImageField(default='default_image.jpg', verbose_name='Аватарка')
 
     def __str__(self):
         return self.name
@@ -45,12 +45,12 @@ class Release(models.Model):
         EP = 'EP'
         ALBUM = 'Album'
 
-    date = models.DateField(auto_now_add=True)
-    name = models.CharField(max_length=255)
+    date = models.DateField(auto_now_add=True, verbose_name='Дата выпуска')
+    name = models.CharField(max_length=255, verbose_name='Название')
     artist = models.ForeignKey(to=Artist, on_delete=models.CASCADE,
-                               related_name='releases')
-    type = models.CharField(default=Type.SINGLE, choices=Type, max_length=50)
-    cover = models.ImageField(default='default__cover_image.jpg', null=True)
+                               related_name='releases', verbose_name='Исполнитель')
+    type = models.CharField(default=Type.SINGLE, choices=Type, max_length=50, verbose_name='Тип')
+    cover = models.ImageField(default='default__cover_image.jpg', null=True, verbose_name='Обложка')
 
     def __str__(self):
         return f'{self.name} of {self.artist}'
@@ -61,11 +61,11 @@ class Release(models.Model):
 
 class Song(models.Model):
     # id - автоматически определяется
-    title = models.CharField(max_length=255)
-    duration = models.IntegerField(validators=[MinValueValidator(1)])
+    title = models.CharField(max_length=255, verbose_name='Название')
+    duration = models.IntegerField(validators=[MinValueValidator(1)], verbose_name='Длительность')
     source = models.FilePathField(path=settings.AUDIO_PATH)
     release = models.ForeignKey(Release, on_delete=models.CASCADE,
-                                related_name='songs')
+                                related_name='songs', verbose_name='Релиз')
 
     def __str__(self):
         return f'{self.title} from {self.release}'

@@ -16,13 +16,13 @@ class ArtistAdmin(admin.ModelAdmin):
     def earnings(self, artist: Artist):
         return f'{artist.monthly_listeners * 0.00001:.2f}$ last month'
 
-    @admin.action(description='Verify selected artists')
+    @admin.action(description='Верифицировать')
     def verify(self, request: HttpRequest, qs: QuerySet):
         changed = qs.update(verified=Artist.Status.VERIFIED)
         self.message_user(request, f'{changed} artists verified',
                           level=messages.SUCCESS)
 
-    @admin.action(description='Unverify selected artists')
+    @admin.action(description='Диверифицировать')
     def unverify(self, request: HttpRequest, qs: QuerySet):
         changed = qs.update(verified=Artist.Status.UNVERIFIED)
         self.message_user(request, f'{changed} artists unverified',
