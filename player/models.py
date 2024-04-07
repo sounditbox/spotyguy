@@ -11,6 +11,7 @@ from django.db import models
 def audio_path():
     return settings.AUDIO_PATH
 
+
 class Artist(models.Model):
     class Status(models.IntegerChoices):
         UNVERIFIED = 0, 'unverified'
@@ -68,7 +69,10 @@ class Song(models.Model):
                                 related_name='songs', verbose_name='Релиз')
 
     def __str__(self):
-        return f'{self.title} from {self.release}'
+        return f'{self.title} '
 
     def get_absolute_url(self):
-        return '/artist/artist_' + str(self.pk)
+        return f'/song/{self.pk}'
+
+    def get_duration_formatted(self):
+        return f'{self.duration // 60}:{self.duration % 60}'
