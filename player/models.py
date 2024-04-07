@@ -56,7 +56,7 @@ class Release(models.Model):
         return f'{self.name} of {self.artist}'
 
     def get_absolute_url(self):
-        return '/releases/release_' + str(self.pk)
+        return '/release/' + str(self.pk)
 
 
 class Song(models.Model):

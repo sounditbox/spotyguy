@@ -2,6 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404
 
 from .models import Artist
+from .models import Release
 
 
 def index(request: HttpRequest):
@@ -18,5 +19,12 @@ def artist(request: HttpRequest, artist_slug):
     return render(request, 'artist.html', context)
 
 
+def release(request: HttpRequest, release_id):
+    rel = Release.objects.get(id=release_id)
+    context = {"release": rel}
+    return render(request, 'release.html', context)
+
+
 def template_tags_and_filters_example(request: HttpRequest):
     return render(request, 'template_example.html')
+

@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{release.name}}</h1> <h3 align="right"> {{release.date}}</h3>
+<h2>{{release.type}}</h2>
+<img class="text-center" src="{{ release.cover.url }}" width="720" height="480"  alt="release">
+{% endblock %}
