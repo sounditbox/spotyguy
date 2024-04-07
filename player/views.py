@@ -20,8 +20,7 @@ def artist(request: HttpRequest, artist_slug):
 
 
 def release(request: HttpRequest, release_id):
-    rel = Release.objects.get(id=release_id)
-    context = {"release": rel}
+    context = {"release": get_object_or_404(Release, id=release_id)}
     return render(request, 'release.html', context)
 
 
