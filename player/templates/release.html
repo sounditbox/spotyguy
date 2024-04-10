@@ -1,13 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{release.name}}</h1> <h3 align="right"> {{release.date}}</h3>
-<a href="{{release.artist.get_absolute_url}}"><img src="{{release.artist.pfp}}"></a>
+<h1>{{release.name}}</h1>
+<h3 align="right"> {{release.date}}</h3>
+<a href="{{release.artist.get_absolute_url}}"
+   style="text-decoration:none; color:black">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-auto">
+                <img width="100" height="100"
+                     src="/media/{{ release.artist.pfp }}">
+
+            </div>
+            <div class="col" style="background-color:grey">
+                <h2>
+                    {{release.artist.name}}</h2>
+            </div>
+        </div>
+
+    </div>
+</a>
 <h2>{{release.type}}</h2>
-<img class="text-center" src="{{ release.cover.url }}" width="720" height="480"  alt="release">
+<img class="text-center" src="{{ release.cover.url }}" width="720" height="480"
+     alt="release">
 <ul>
     {% for song in release.songs.all %}
-        <li>{{song.title}} - {{song.get_duration_formatted}}</li>
+    <a href="{{song.get_absolute_url}}"><li>{{song.title}} - {{song.get_duration_formatted}}</li></a>
     {% endfor %}
 </ul>
 {% endblock %}

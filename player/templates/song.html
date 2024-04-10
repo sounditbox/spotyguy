@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <div>
+        <a href="{{song.release.get_absolute_url}}"><img width="300" height="300" src="/media/{{song.release.cover}}"></a>
+    </div>
+    <div>
+        <audio controls><source src="{{song.source}}" type="audio/mp3"></audio>
+    </div>
+</div>
+{% endblock %}

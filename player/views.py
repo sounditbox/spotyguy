@@ -1,7 +1,7 @@
 from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404
 
-from .models import Artist
+from .models import Artist, Song
 from .models import Release
 
 
@@ -23,6 +23,9 @@ def release(request: HttpRequest, release_id):
     context = {"release": get_object_or_404(Release, id=release_id)}
     return render(request, 'release.html', context)
 
+def song(request: HttpRequest, song_id):
+    context = {'song': get_object_or_404(Song, id=song_id)}
+    return render(request, 'song.html', context)
 
 def template_tags_and_filters_example(request: HttpRequest):
     return render(request, 'template_example.html')

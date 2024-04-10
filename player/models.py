@@ -75,4 +75,5 @@ class Song(models.Model):
         return f'/song/{self.pk}'
 
     def get_duration_formatted(self):
-        return f'{self.duration // 60}:{self.duration % 60}'
+        # str.zfill(2)
+        return f'{self.duration // 60}'.zfill(2) + ':' + f'{self.duration % 60}'.zfill(2)
