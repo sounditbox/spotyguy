@@ -3,10 +3,10 @@
 {% block content %}
 <div>
     <div>
-        <a href="{{song.release.get_absolute_url}}"><img width="300" height="300" src="/media/{{song.release.cover}}"></a>
+        <a href="{{ song.release.get_absolute_url }}"><img width="300" height="300" src="/media/{{song.release.cover}}"></a>
     </div>
     <div>
-        <audio controls><source src="{{song.source}}" type="audio/mp3"></audio>
+        <audio src="/media/audio/{{ song.get_relative_source }}" controls></audio>
     </div>
 </div>
 {% endblock %}

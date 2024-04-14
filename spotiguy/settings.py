@@ -128,4 +128,4 @@ STATIC_ROOT = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
-AUDIO_PATH = MEDIA_ROOT / "audio/"
+AUDIO_PATH = BASE_DIR / 'media/audio/'

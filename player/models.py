@@ -77,3 +77,6 @@ class Song(models.Model):
     def get_duration_formatted(self):
         # str.zfill(2)
         return f'{self.duration // 60}'.zfill(2) + ':' + f'{self.duration % 60}'.zfill(2)
+
+    def get_relative_source(self):
+        return self.source.split('\\')[-1]
