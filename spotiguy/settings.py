@@ -33,13 +33,15 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+    'channels',
+    'player',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'player',
     'django_extensions',
 ]
 
@@ -71,9 +73,14 @@ TEMPLATES = [
     },
 ]
 
+ASGI_APPLICATION = "spotiguy.asgi.application"
 WSGI_APPLICATION = 'spotiguy.wsgi.application'
 
-
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

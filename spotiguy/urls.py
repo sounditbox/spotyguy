@@ -22,7 +22,8 @@ from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('player.urls'))
+    path('', include('player.urls')),
+    # path("ws/audio_player/", AudioPlayerConsumer.as_asgi()),
 ]
 
 if settings.DEBUG:
