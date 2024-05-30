@@ -44,41 +44,43 @@
 //    // Example: Check if buffer contains end-of-audio marker
 //    return audioDataBuffer.includes('END_OF_AUDIO_MARKER');
 //}
-
 const socket = new WebSocket('ws://127.0.0.1:8000/ws/audio_player/');
-        let audioDataBuffer = '';
+let mediaSource = new MediaSource();
+let audioElement = document.getElementById('audioPlayer');
+audioElement.src = URL.createObjectURL(mediaSource);
+mediaSource.addEventListener('sourceopen', function () {
+    let sourceBuffer = mediaSource.addSourceBuffer('audio/mpeg');
+    sourceBuffer.appendBuffer(blob);
+}, { once: true });
 
-        socket.onopen = function(event) {
-            console.log('WebSocket connection established.');
-            document.getElementById('startButton').onclick = function() {
-                const message = JSON.stringify({command: 'start_audio_transfer'});
-                socket.send(message);
-            };
-        };
+socket.onopen = function(event) {
+    console.log('WebSocket connection established.');
+    document.getElementById('startButton').onclick = function() {
+        socket.send('start_audio_transfer');
+    };
+};
 
-        socket.onmessage = function(event) {
-            const data = JSON.parse(event.data);
-            if (data.error) {
-                console.error('Error:', data.error);
-                return;
-            }
-            if (data.end) {
-                console.log('data received');
-                console.log(audioDataBuffer);
+socket.onmessage = function(event) {
+    if (event.data === 'END_OF_AUDIO_MARKER') {
+        console.log('Audio transfer complete');
+        return;
+    }
+    if (event.data instanceof Blob) {
+        handleBlob(event.data);
+    } else if (typeof event.data === 'string' && event.data === 'Audio file not found') {
+        console.error('Audio file not found');
+    }
+};
 
-                const audioElement = document.getElementById('audioPlayer');
-                audioElement.src = 'data:audio/mp3;base64,' + audioDataBuffer;
-                audioElement.play();
-                audioDataBuffer = '';  // Reset buffer after playing
-            } else if (data.chunk) {
-                audioDataBuffer += data.chunk;
-            }
-        };
+socket.onerror = function(event) {
+    console.error('WebSocket error observed:', event);
+};
 
-        socket.onerror = function(event) {
-            console.error('WebSocket error observed:', event);
-        };
+socket.onclose = function(event) {
+    console.log('WebSocket connection closed.');
+};
 
-        socket.onclose = function(event) {
-            console.log('WebSocket connection closed.');
-        };
+function handleBlob(blob) {
+    let sourceBuffer = mediaSource.sourceBuffers[0];
+    sourceBuffer.appendBuffer(blob);
+}
