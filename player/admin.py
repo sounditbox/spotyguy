@@ -2,7 +2,7 @@ from django.contrib import admin, messages
 from django.db.models import QuerySet
 from django.http import HttpRequest
 
-from .models import Artist, Release, Song
+from .models import Artist, Release, Song, Playlist
 
 
 @admin.register(Artist)
@@ -12,7 +12,8 @@ class ArtistAdmin(admin.ModelAdmin):
     list_display_links = ('name', 'slug')
     list_filter = ('verified',)
 
-    @admin.decorators.display(description='Заработок', ordering='monthly_listeners')
+    @admin.decorators.display(description='Заработок',
+                              ordering='monthly_listeners')
     def earnings(self, artist: Artist):
         return f'{artist.monthly_listeners * 0.00001:.2f}$ last month'
 
@@ -39,5 +40,10 @@ class ReleaseAdmin(admin.ModelAdmin):
 
 
 @admin.register(Song)
-class Song(admin.ModelAdmin):
+class SongAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Playlist)
+class PlaylistAdmin(admin.ModelAdmin):
     pass

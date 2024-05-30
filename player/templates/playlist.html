@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{playlist.name}}</h1>
+
+<a href="{{playlist.artist.get_absolute_url}}"
+   style="text-decoration:none; color:black">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-auto">
+                <img width="100" height="100"
+                     src="/media/{{ playlist.artist.pfp }}">
+
+            </div>
+            <div class="col" style="background-color:grey">
+                <h2>
+                    {{playlist.artist.name}}</h2>
+            </div>
+        </div>
+
+    </div>
+</a>
+<h2>{{playlist.type}}</h2>
+<img class="text-center" src="{{ playlist.cover.url }}" width="720" height="480"
+     alt="playlist">
+<ul>
+    {% for song in playlist.songs.all %}
+    <a href="{{ song.get_absolute_url }}"><li>{{song.song.title}} - {{song.song.get_duration_formatted}}</li></a>
+    {% endfor %}
+</ul>
+{% endblock %}

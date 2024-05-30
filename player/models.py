@@ -4,7 +4,6 @@ from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
 
-
 # MVT - Model View Template
 
 
@@ -80,3 +79,26 @@ class Song(models.Model):
 
     def get_relative_source(self):
         return self.source.split('\\')[-1]
+
+
+class Playlist(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Название')
+    cover = models.ImageField(default='default__cover_image.jpg', null=True, verbose_name='Обложка')
+
+    def __str__(self):
+        return f'Playlist:{self.name}'
+
+    def get_absolute_url(self):
+        return '/playlist/' + str(self.pk)
+
+
+class SongInPlaylist(models.Model):
+    song = models.ForeignKey(Song, on_delete=models.DO_NOTHING)
+    playlist = models.ForeignKey(Playlist, on_delete=models.DO_NOTHING, related_name='songs')
+    date_added = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return str(self.song)
+
+    def get_absolute_url(self):
+        return '/song_in_playlist/' + str(self.pk)
