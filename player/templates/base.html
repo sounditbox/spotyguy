@@ -65,6 +65,12 @@
                     <path d="M8 2.82a1 1 0 0 1 .804-.98l3-.6A1 1 0 0 1 13 2.22V4L8 5z"/>
                 </svg>
                 <h3><strong>Spotiguy</strong></h3>
+                {% if user.is_authenticated %}
+                <p>{{user.username}}</p>
+                {% else %}
+                <p>login</p>
+                {% endif %}
+
             </a>
             <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarHeader" aria-controls="navbarHeader"
@@ -84,16 +90,16 @@
 </main>
 
 <!--<div class="fixed-bottom"><button id='button_play_pause' onclick="playAudio()"><img width="20" height="20" src="{% static 'img/play.png' %}" alt="no img"></button></div>-->
-<button id="startButton">Start Audio</button>
-<audio id="audioPlayer" controls></audio>
-<footer class="text-muted">
-    <div class="container">
-        <p class="float-right">
-            <a href="#">Back to top</a>
-        </p>
-        <p>Spotiguy is © Spotiguy, all rights reserved</p>
-    </div>
-</footer>
+<!--<button id="startButton">Start Audio</button>-->
+<!--<audio id="audioPlayer" controls></audio>-->
+<!--<footer class="text-muted">-->
+<!--    <div class="container">-->
+<!--        <p class="float-right">-->
+<!--            <a href="#">Back to top</a>-->
+<!--        </p>-->
+<!--        <p>Spotiguy is © Spotiguy, all rights reserved</p>-->
+<!--    </div>-->
+<!--</footer>-->
 <!--<svg xmlns="http://www.w3.org/2000/svg" width="347" height="225"-->
 <!--     viewBox="0 0 347 225" preserveAspectRatio="none"-->
 <!--     style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;">-->

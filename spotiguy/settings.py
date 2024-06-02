@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "daphne",
     'channels',
     'player',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
