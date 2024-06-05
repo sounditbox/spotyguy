@@ -51,7 +51,7 @@ class Release(models.Model):
                                related_name='releases', verbose_name='Исполнитель')
     type = models.CharField(default=Type.SINGLE, choices=Type, max_length=50, verbose_name='Тип')
     cover = models.ImageField(default='default__cover_image.jpg', null=True, verbose_name='Обложка')
-
+    # add song
     def __str__(self):
         return f'{self.name} of {self.artist}'
 

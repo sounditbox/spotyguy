@@ -37,13 +37,17 @@ class ReleaseAdmin(admin.ModelAdmin):
     list_display = ('name', 'date', 'type', 'cover', 'artist')
     list_editable = ('type', 'artist')
     list_display_links = ('name',)
+    # Add song
 
 
 @admin.register(Song)
 class SongAdmin(admin.ModelAdmin):
-    pass
+    # Duration - auto
+    list_display = ('title', 'release')
+    list_editable = ('release',)  # sort by artist name for ease
 
 
 @admin.register(Playlist)
 class PlaylistAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'cover')
+    list_display_links = ('name',)
