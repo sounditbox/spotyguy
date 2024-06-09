@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
 
+from users.models import Profile
 # MVT - Model View Template
 
 
@@ -33,7 +34,6 @@ class Artist(models.Model):
         ordering = ['-monthly_listeners', 'name']
         verbose_name = "Артист"
         verbose_name_plural = "Артисты"
-
 
     def get_absolute_url(self):
         return '/artist/artist_' + str(self.pk)
@@ -84,6 +84,7 @@ class Song(models.Model):
 class Playlist(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
     cover = models.ImageField(default='default__cover_image.jpg', null=True, verbose_name='Обложка')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='playlists', null=True)
 
     def __str__(self):
         return f'Playlist:{self.name}'
