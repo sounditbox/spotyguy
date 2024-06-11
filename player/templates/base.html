@@ -77,7 +77,7 @@
 
             <div>
                 <p>{% if user.is_authenticated %}
-                <a style='text-decoration:none' href="/profile"><span class="a">{{user.username}}</span></a>|
+                <a style='text-decoration:none' href="{% url 'profile' %}"><span class="a">{{user.username}}</span></a>|
                 <a style='text-decoration:none' href="{% url 'logout' %}"><span class="a">Log out</span></a>  |
                 {% else %}
                 <a style='text-decoration:none' href="{% url 'login' %}"><span class="a">Sign In</span></a>|

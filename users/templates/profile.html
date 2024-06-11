@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{user.pfp}}
+<img src="{{ profile.pfp.url }}" alt="Image Not Found">
 <h3>Profile</h3>
 <h1 align="center">{{user.name}}</h1>
-<h2>public/private  {{followers}} followers    {{following}} following</h2>
-{% end block %}
+<h2>{{ profile.followers }} followers  {{ profile.following }} following</h2>
+{% endblock %}
