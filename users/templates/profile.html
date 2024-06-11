@@ -1,8 +1,14 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
 <img src="{{ profile.pfp.url }}" alt="Image Not Found">
-<h3>Profile</h3>
-<h1 align="center">{{user.name}}</h1>
-<h2>{{ profile.followers }} followers  {{ profile.following }} following</h2>
+<h1>Profile</h1>
+<div>
+    <h2>Username: {{ profile.user.username }} <a href="/change_username">Изменить</a></h2>
+</div>
+<h2>E-mail: {{ profile.user.email }} </h2>
+<h2>{{ profile.followers }} followers </h2>
+<h2>{{ profile.following }} following </h2>
+
 {% endblock %}

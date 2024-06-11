@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, ProfileChangeForm
 from .models import Profile
 
 
@@ -50,4 +50,5 @@ def profile(request: HttpRequest, pk=None):
         profile = get_object_or_404(Profile, user=request.user)
     else:
         profile = get_object_or_404(Profile, pk=pk)
+
     return render(request, 'profile.html', context={'profile': profile})

@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm, TextInput, PasswordInput, EmailInput
+from django.forms import ModelForm, TextInput, PasswordInput, EmailInput, Form
+
+from users.models import Profile
 
 
 class LoginForm(ModelForm):
@@ -16,6 +18,13 @@ class LoginForm(ModelForm):
             'username': 'Username',
             'password': 'Password'
         }
+
+
+class ProfileChangeForm(Form):
+    username = forms.CharField()
+    pfp = forms.ImageField()
+
+
 
 
 class RegisterForm(ModelForm):
