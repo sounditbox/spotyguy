@@ -41,9 +41,11 @@ class ReleaseAdmin(admin.ModelAdmin):
 
 @admin.register(Song)
 class SongAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'duration', 'release')
+    list_display_links = ('release',)
 
 
 @admin.register(Playlist)
 class PlaylistAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('name', 'cover', 'profile')
+    list_display_links = ('profile',)

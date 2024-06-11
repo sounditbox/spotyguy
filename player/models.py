@@ -5,6 +5,8 @@ from django.core.validators import MinValueValidator
 from django.db import models
 
 from users.models import Profile
+
+
 # MVT - Model View Template
 
 
@@ -86,6 +88,7 @@ class Playlist(models.Model):
     cover = models.ImageField(default='default__cover_image.jpg', null=True, verbose_name='Обложка')
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='playlists', null=True)
 
+    # add public/private
     def __str__(self):
         return f'Playlist:{self.name}'
 
