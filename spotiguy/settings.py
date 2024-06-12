@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "daphne",
     'channels',
     'player',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -136,3 +137,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 AUDIO_PATH = BASE_DIR / 'media/audio/'
+
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    'users.authentication.EmailUserBackend'
+]
