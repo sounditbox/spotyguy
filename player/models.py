@@ -70,7 +70,7 @@ class Song(models.Model):
                                 related_name='songs', verbose_name='Релиз')
 
     def __str__(self):
-        return f'{self.title} '
+        return f'{self.title}'
 
     def get_absolute_url(self):
         return f'/song/{self.pk}'
@@ -90,7 +90,7 @@ class Playlist(models.Model):
 
     # add public/private
     def __str__(self):
-        return f'Playlist:{self.name}'
+        return f'Playlist {self.name}'
 
     def get_absolute_url(self):
         return '/playlist/' + str(self.pk)
