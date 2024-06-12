@@ -2,15 +2,16 @@
 {% load static %}
 
 {% block content %}
-<h1>{{artist.name}} {% if artist.verified %}
-    <img alt="Картинка не найдена" width="30"
-         height="30"
-         src="{% static 'img/verified.png' %}">
-{% endif %}</h1>
-<img class="text-center" src="{{ artist.pfp.url }}" width="720" height="480"  alt="artist">
-
-<h3>Monthly listeners: {{ artist.monthly_listeners }}</h3>
-<h3>Subscribers: {{ artist.subscribers }}</h3>
+<div class="top_bg">
+    <h1>{{artist.name}} {% if artist.verified %}
+        <img alt="Картинка не найдена" width="30"
+             height="30"
+             src="{% static 'img/verified.png' %}">
+    {% endif %}</h1>
+    <img class="text-center" src="{{ artist.pfp.url }}" width="180" height="120"  alt="artist">
+</div>
+    <h3>Monthly listeners: {{ artist.monthly_listeners }}</h3>
+    <h3>Subscribers: {{ artist.subscribers }}</h3>
 <h3>bio: </h3>
 <p>{{ artist.bio }}</p>
       <div class="row">
@@ -27,19 +28,6 @@
                                 <h3>{{rel.name}}</h3>
                                 <h4>{{rel.type.value}}</h4>
                                 <h5>{{ rel.date }}</h5>
-                                <!--                            <div class="d-flex justify-content-between align-items-center">-->
-                                <!--                                <div class="btn-group">-->
-                                <!--                                    <button type="button"-->
-                                <!--                                            class="btn btn-sm btn-outline-secondary">-->
-                                <!--                                        View-->
-                                <!--                                    </button>-->
-                                <!--                                    <button type="button"-->
-                                <!--                                            class="btn btn-sm btn-outline-secondary">-->
-                                <!--                                        Edit-->
-                                <!--                                    </button>-->
-                                <!--                                </div>-->
-                                <!--                                <small class="text-muted">9 mins</small>-->
-                                <!--                            </div>-->
                             </div>
                         </div>
                     </a>
