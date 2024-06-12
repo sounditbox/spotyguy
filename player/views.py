@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import HttpRequest
 from django.shortcuts import render, get_object_or_404
 
@@ -37,3 +38,11 @@ def playlist(request: HttpRequest, pl_id):
 
 def template_tags_and_filters_example(request: HttpRequest):
     return render(request, 'template_example.html')
+
+
+def player(request: HttpRequest):
+    paginator = Paginator(Song.objects.all(), 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj": page_obj}
+    return render(request, "player.html", context)
