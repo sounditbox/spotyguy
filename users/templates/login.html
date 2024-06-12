@@ -1,16 +1,37 @@
-{% extends 'base.html' %}
+{% extends 'base_login.html' %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-        <p>
-            {{field.label}}:
-            {{field}}
-        </p>
-    {% endfor %}
-    <button type="submit">Log in</button>
-</form>
-
+<div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+        <header>Login</header>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <p>
+                {{field.label}}:
+                {{field}}
+            </p>
+            {% endfor %}
+             <button class="login_button" type="submit">Login</button>
+        </form>
+        <div class="signup">
+        <span class="signup">Don't have an account?
+         <a href="{% url 'register' %}">Signup</a>
+        </span>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
+
+<body>
+
+<form action="#">
+    <input type="text" placeholder="Enter your email">
+    <input type="password" placeholder="Enter your password">
+
+</form>
+
+</body>
+</html>
